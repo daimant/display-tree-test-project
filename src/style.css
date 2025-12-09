@@ -1,0 +1,11 @@
+body {
+  margin: 0;
+  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+}
+
+#app {
+  min-height: 100vh;
+  max-width: 70vw;
+  width: 70vw;
+  transform: translateX(15vw);
+}
