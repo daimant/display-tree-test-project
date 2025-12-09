@@ -14,8 +14,7 @@ const categoryCellRenderer = (params: any) => {
   const toggle = document.createElement("span");
 
   if (hasChildren) {
-    toggle.textContent = params.node.expanded ? "▼" : "▶"
-    toggle.className = "toggle-icon"
+    toggle.className = `ag-icon ${params.node.expanded ? "ag-icon-tree-open" : "ag-icon-tree-closed"}`
 
     container.addEventListener("click", (event) => {
       event.stopPropagation();
@@ -30,15 +29,16 @@ const categoryCellRenderer = (params: any) => {
 
   const text = document.createElement("span");
   text.textContent = params.value;
+  text.style = `margin-left: ${params.node.level * 16 + 8}px`;
 
   container.append(toggle, text);
   return container;
 };
 
 const columnDefs = ref([
-  { headerName: "No", valueGetter: "node.rowIndex + 1", width: 90 },
+  { headerName: "№ п/п", valueGetter: "node.rowIndex + 1", width: 120 },
   { headerName: "Категория", field: "category", width: 160, cellRenderer: categoryCellRenderer },
-  { headerName: "Название", field: "label", flex: 1 }
+  { headerName: "Наименование", field: "label", flex: 1 }
 ]);
 
 const rows = computed(() =>
@@ -83,30 +83,6 @@ const getRowId = (params: any) => String(params.data.id);
 .grid {
   width: 100%;
   height: 100%;
-}
-
-.category-cell {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-}
-
-.toggle-icon {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  width: 18px;
-  height: 18px;
-  border-radius: 4px;
-  background: #eef2ff;
-  color: #4338ca;
-  font-size: 12px;
-  cursor: pointer;
-  transition: background 0.15s ease, color 0.15s ease;
-}
-
-.toggle-icon:hover {
-  background: #e0e7ff;
 }
 
 </style>
